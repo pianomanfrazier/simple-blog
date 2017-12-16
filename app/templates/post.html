@@ -6,8 +6,15 @@
 <h2 style="color:red">Preview</h2>
 {% endif %}
 
-<h1>Post page</h1>
-
-{{ slug|replace('-',' ')|title }}
+<h1>{{ post.title }}</h1>
+<div>
+  {{ post.date }}
+</div>
+<ul>
+  {% for tag in post.tags %}
+    <li>{{ tag }}</li>
+  {% endfor %}
+</ul>
+{{ post.body|markdown|safe }}
 
 {% endblock %}
