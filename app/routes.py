@@ -13,6 +13,7 @@ def post(slug=None):
     return redirect(url_for('index'))
   else:
     #fetch the article from the DB with the slug
+    #make sure it is published
     return render_template('post.html', slug=slug)
 
 #eventually there will be no login route
@@ -35,3 +36,10 @@ def edit(post_id=None):
   else:
     return render_template('edit.html', post_id=post_id)
 
+@app.route('/preview')
+@app.route('/preview/<string:slug>')
+def preview(slug=None):
+  if slug == None:
+    return redirect(url_for('admin'))
+  else:
+    return render_template('post.html', slug=slug)
