@@ -1,12 +1,24 @@
 from flask import render_template, redirect, url_for, Blueprint
+from flask_login import login_user, logout_user, current_user, login_required
+from ..forms import LoginForm
 
 admin_panel = Blueprint('admin', __name__)
 
 #eventually there will be no login route
 #show login page for /admin route if not logged in
-@admin_panel.route('/login')
+@admin_panel.route('/login', methods=['GET', 'POST'])
 def login():
-  return render_template('admin/login.html')
+  if current_user.is_authenticated:
+    return redirect(url_for('.admin'))
+  form = LoginForm()
+  if form.validate_on_submit():
+    user = {}
+    if user is None:
+      flash('Invalid username or password')
+      return redirect(url_for('.login'))
+    login_user(user)
+    return redirect(url_for('.admin'))
+  return render_template('admin/login.html', form=form)
 
 @admin_panel.route('/')
 def admin():

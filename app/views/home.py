@@ -49,6 +49,8 @@ oblectamina, nosterque. Anno habebat silentia quoque Iovis nostra harenae luna
 conubia quaesita iam caput qua fallaces, mixtos, et. Nostro gentis colla, sic
 subito necis admoto creverat? Eque dum fides thalamos.
 
+![kity](/static/cat.png)
+
 Pectora in cinerem umor certo forma, fontesque te ibat. Euboea deducens nec sum
 ac elementaque tellus facies properatus ad nostris contigit eligit conpendia.
 **Et ut** labore dixit tenens quem cepit Aeoliique. In Iphis tua et retro,
