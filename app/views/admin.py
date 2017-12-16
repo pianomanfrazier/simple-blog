@@ -28,4 +28,17 @@ def preview(slug=None):
   if slug == None:
     return redirect(url_for('.admin'))
   else:
-    return render_template('post.html', slug=slug, preview = True)
+    post = { 'title' : 'How to tame a bear',
+      'date'  : 'December 17, 2017',
+      'slug'  : 'tame-your-bear',
+      'tags'  : ['food', 'stuff', 'cat'],
+      'body'  :
+"""
+# Howdy partner
+
+[here is a link](www.google.com) yippee!
+""",
+      'draft' : False,
+      'id'    : 3
+    }
+    return render_template('post.html', post=post , preview = True)

@@ -42,10 +42,6 @@ effluat. Natam et mercede longoque si tantus Persea. Latices iacent.
 
 <script> alert('hacked'); </script>
 
-```javascript
-<script> alert('hacked'); </script>
-```
-
 ## In sed Volturnus in occasus capellae contingere
 
 *Nec nitidae premit*, armenti odiis, qui lumine debere gemitu Myrrha venerande
@@ -66,21 +62,24 @@ posts = [
     'slug'  : 'tame-a-cat',
     'tags'  : ['food', 'stuff', 'cat'],
     'body'  : body,
-    'draft' : False
+    'draft' : False,
+    'id'    : 1
   },
   { 'title' : 'How to tame a wildabeast',
     'date'  : 'December 18, 2017',
     'slug'  : 'tame-your-wildabeast',
     'tags'  : ['food', 'stuff', 'cat'],
     'body'  : body,
-    'draft' : False
+    'draft' : False,
+    'id'    : 2
   },
   { 'title' : 'How to tame a bear',
     'date'  : 'December 17, 2017',
     'slug'  : 'tame-your-bear',
     'tags'  : ['food', 'stuff', 'cat'],
     'body'  : body,
-    'draft' : False
+    'draft' : False,
+    'id'    : 3
   },
 ]
 
