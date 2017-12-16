@@ -2,6 +2,10 @@
 
 {% block content %}
 
+{% if preview %}
+<h2 style="color:red">Preview</h2>
+{% endif %}
+
 <h1>Post page</h1>
 
 {{ slug|replace('-',' ')|title }}
