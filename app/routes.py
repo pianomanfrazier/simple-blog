@@ -15,8 +15,16 @@ def post(slug=None):
     #fetch the article from the DB with the slug
     return render_template('post.html', slug=slug)
 
+#eventually there will be no login route
+#show login page for /admin route if not logged in
+@app.route('/login')
+def login():
+  return render_template('login.html')
+
 @app.route('/admin')
 def admin():
+  #if not logged in show login page
+  #else show admin page
   return render_template('admin.html')
 
 @app.route('/edit')
@@ -26,8 +34,4 @@ def edit(post_id=None):
     return redirect(url_for('admin'))
   else:
     return render_template('edit.html', post_id=post_id)
-
-@app.route('/login')
-def login():
-  return render_template('login.html')
 
