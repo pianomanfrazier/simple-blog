@@ -11,13 +11,13 @@
   {{ form.username.label }}
   {{ form.username(size=32) }}
   {% for error in form.username.errors %}
-    <span style="color: red"> {{ error }} </span>
+    <div style="color: red;"> {{ error }} </div>
   {% endfor %}
 
   {{ form.password.label }}
   {{ form. password(size=32) }}
   {% for error in form.password.errors %}
-    <span style="color: red"> {{ error }} </span>
+    <div style="color: red;"> {{ error }} </div>
   {% endfor %}
 
   {{ form.submit() }}
