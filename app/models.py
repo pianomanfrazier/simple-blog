@@ -30,8 +30,7 @@ class Comment(db.Model):
   timestamp    = db.Column(db.DateTime, default=datetime.utcnow)
   approved     = db.Column(db.Boolean)
 
-
 class Media(db.Model):
   id           = db.Column(db.Integer, primary_key=True)
   mime         = db.Column(db.String(16))
-  filepath = db.Column(db.String(16)) 
+  filepath     = db.Column(db.String(16)) 

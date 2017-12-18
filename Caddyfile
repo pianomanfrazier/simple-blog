@@ -1,5 +1,6 @@
 localhost:2015 {
-  tls self_signed
+  tls off
+  #tls self_signed
   # The email address to use to generate a certificate with Letsencrypt.
   #tls {{ cookiecutter.email }}
 
