@@ -1,26 +1,11 @@
-from flask import render_template, redirect, url_for, Blueprint
-from flask_login import login_user, logout_user, current_user, login_required
+from flask import render_template, redirect, url_for, Blueprint, flash
+from ..authentication import requires_auth
 from ..forms import LoginForm
 
 admin_panel = Blueprint('admin', __name__)
 
-#eventually there will be no login route
-#show login page for /admin route if not logged in
-@admin_panel.route('/login', methods=['GET', 'POST'])
-def login():
-  if current_user.is_authenticated:
-    return redirect(url_for('.admin'))
-  form = LoginForm()
-  if form.validate_on_submit():
-    user = {}
-    if user is None:
-      flash('Invalid username or password')
-      return redirect(url_for('.login'))
-    login_user(user)
-    return redirect(url_for('.admin'))
-  return render_template('admin/login.html', form=form)
-
 @admin_panel.route('/')
+@requires_auth
 def admin():
   #if not logged in show login page
   #else show admin page
@@ -28,6 +13,7 @@ def admin():
 
 @admin_panel.route('/edit')
 @admin_panel.route('/edit/<int:post_id>')
+@requires_auth
 def edit(post_id=None):
   if post_id == None:
     return redirect(url_for('.admin'))
@@ -36,6 +22,7 @@ def edit(post_id=None):
 
 @admin_panel.route('/preview')
 @admin_panel.route('/preview/<slug>')
+@requires_auth
 def preview(slug=None):
   if slug == None:
     return redirect(url_for('.admin'))
@@ -48,7 +35,7 @@ def preview(slug=None):
 """
 # Howdy partner
 
-[here is a link](www.google.com) yippee!
+[here is a link](https://www.google.com) yippee!
 """,
       'draft' : False,
       'id'    : 3
