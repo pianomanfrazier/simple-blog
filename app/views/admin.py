@@ -1,5 +1,6 @@
 from flask import render_template, redirect, url_for, Blueprint
 from flask_login import login_user, logout_user, current_user, login_required
+from app.models import Admin
 from ..forms import LoginForm
 
 admin_panel = Blueprint('admin', __name__)
@@ -12,11 +13,11 @@ def login():
     return redirect(url_for('.admin'))
   form = LoginForm()
   if form.validate_on_submit():
-    user = {}
-    if user is None:
+    if not Admin.validate_password(form.password.data) or \
+       not Admin.validate_username(form.username.data):
       flash('Invalid username or password')
       return redirect(url_for('.login'))
-    login_user(user)
+    login_user(Admin)
     return redirect(url_for('.admin'))
   return render_template('admin/login.html', form=form)
 
