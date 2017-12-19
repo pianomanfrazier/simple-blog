@@ -10,14 +10,12 @@
 {{ post_id }}
 </p>
 
-<!-- edit post form 
-title
-slug
-pub-date
-draft (checkbox)
-category
-tags (comma separated)
--->
+<form action="{{ url_for('admin.upload') }}" method="post" enctype="multipart/form-data">
+  <fieldset class="uk-fieldset uk-flex">
+    <input class="upload-button" type=file name=file>
+    <input class="uk-button" type=submit value=Upload>
+  </fieldset>
+</form>
 
 <form name="edit" action="" method="post" accept-charset="utf-8">
 
@@ -45,22 +43,6 @@ tags (comma separated)
     <div style="color: red;"> {{ error }} </div>
   {% endfor %}
 
-  <!-- UPLOAD MEDIA -->
-  <!--
-  media stored in filesystem (limit size by 1MB)
-  path, MIME, post-id stored in media DB table
-  -->
-  <div class="js-upload uk-placeholder uk-text-center">
-      <span uk-icon="icon: cloud-upload"></span>
-      <span class="uk-text-middle">Attach photos by dropping them here or</span>
-      <div uk-form-custom>
-          <input type="file" multiple>
-          <span class="uk-link">selecting one</span>
-      </div>
-  </div>
-
-  <progress id="js-progressbar" class="uk-progress" value="0" max="100" hidden></progress>
-
   <!-- PREVIEW button -->
   <!-- save post and open current post in new tab -->
   <div class="uk-flex">
@@ -77,8 +59,6 @@ tags (comma separated)
     <div style="color: red;"> {{ error }} </div>
   {% endfor %}
 
-
-
 </form>
 
 
@@ -94,6 +74,5 @@ tags (comma separated)
 var editor = new Editor();
 editor.render();
 </script>
-<script src="/static/javascript/drop_upload.js"></script>
 
 {% endblock %}

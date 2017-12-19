@@ -9,7 +9,10 @@ main {
   margin: 0 auto;
 }
 
+.input-component {
+  margin: 0 0.5em 0.5em 0;
+}
+
 .uk-button {
-  margin: 0.5em 0;
-  margin-right: 0.5em;
+  margin: 0 0.5em 0.5em 0;
 }

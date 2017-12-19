@@ -3,11 +3,11 @@
 {% block content %}
 
 {% if preview %}
-<h2 style="color:red">Preview</h2>
+<div style="color:red">Preview</div>
 {% endif %}
 
 <h1>{{ post.title }}</h1>
-<div>
+<div class="uk-text-meta">
   {{ post.date }}
 </div>
 <ul>

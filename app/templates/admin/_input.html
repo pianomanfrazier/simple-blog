@@ -1,7 +1,7 @@
-{% macro input(component, size=16, placeholder="", labelclass="", inputclass="uk-input", value="", data="") -%}
-  <div class="">
+{% macro input(component, size=16, placeholder="", labelclass="", inputclass="uk-input", value="") -%}
+  <div class="input-component">
     {{ component.label(class=labelclass) }}
-    {{ component(size=size, placeholder=placeholder, class=inputclass, value=value, data=data) }}
+    {{ component(size=size, placeholder=placeholder, class=inputclass, value=value) }}
     {% for error in component.errors %}
       <div style="color: red;"> {{ error }} </div>
     {% endfor %}
