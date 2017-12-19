@@ -1,18 +1,15 @@
+#editor {
+  border-bottom: 1px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+}
+
 main {
-  max-width: 40em;
+  max-width: 37em;
   margin: 0 auto;
 }
 
-[type="checkbox"] {
-  opacity: 1;
-  padding: 2px;
-  margin: -4px 6px;
-}
-
-fieldset {
-  padding-left: 0.5em;
-}
-
-.pr1 {
-  padding-right: 0.5em;
+.uk-button {
+  margin: 0.5em 0;
+  margin-right: 0.5em;
 }

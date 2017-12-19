@@ -1,3 +1,5 @@
+{% from "admin/_input.html" import input %}
+
 {% extends "base.html" %}
 
 {% block content %}
@@ -8,14 +10,6 @@
 {{ post_id }}
 </p>
 
-<form action="" method="post" accept-charset="utf-8" style="width:200px">
-  <label class="dropimage">
-    <input title="Drop image or click me" type="file" name="photo">
-  </label>
-  <input type="submit" value="Upload" />
-</form>
-
-
 <!-- edit post form 
 title
 slug
@@ -24,95 +18,82 @@ draft (checkbox)
 category
 tags (comma separated)
 -->
+
 <form name="edit" action="" method="post" accept-charset="utf-8">
 
   {{ form.hidden_tag() }}
 
-  <fieldset class="flex two">
-    
-    <div class="pr1" >
-    {{ form.title.label }}
-    {{ form.title(size=24, placeholder='A New Post') }}
-    {% for error in form.title.errors %}
-      <div style="color: red;"> {{ error }} </div>
-    {% endfor %}
-    </div>
 
-    <div class="pr1">
-    {{ form.slug.label }}
-    {{ form.slug(size=16, placeholder='a-new-post') }}
-    {% for error in form.slug.errors %}
-      <div style="color: red;"> {{ error }} </div>
-    {% endfor %}
-    </div>
+  <fieldset class="uk-fieldset uk-flex">
+
+    {{ input(form.title, size=24, placeholder="A New Post") }} 
+    {{ input(form.slug, size=16, placeholder="a-new-post") }} 
 
   </fieldset>
 
-  <fieldset class="flex three">
+  <fieldset class="uk-fieldset uk-flex">
     
-    <div class="pr1" style="width: 7em;">
-    {{ form.pub_date.label }}
-    {{ form.pub_date(size=8, placeholder='12/01/17') }}
-    {% for error in form.pub_date.errors %}
-      <div style="color: red;"> {{ error }} </div>
-    {% endfor %}
-    </div>
-
-    <div class="pr1">
-    {{ form.category.label }}
-    {{ form.category(size=16) }}
-    {% for error in form.category.errors %}
-      <div style="color: red;"> {{ error }} </div>
-    {% endfor %}
-    </div>
-
-    <div class="pr1">
-    {{ form.tags.label }}
-    {{ form.tags(size=16, placeholder='tag1, tag2, tag3') }}
-    {% for error in form.tags.errors %}
-      <div style="color: red;"> {{ error }} </div>
-    {% endfor %}
-    </div>
+    {{ input(form.pub_date, size=8, placeholder="12/01/17") }} 
+    {{ input(form.category, size=16) }} 
+    {{ input(form.tags, size=16, placeholder="tag1, tag2, tag3") }} 
 
   </fieldset>
 
-  <br>
   {{ form.draft.label }}
-  {{ form.draft() }}
+  {{ form.draft(class="uk-checkbox") }}
   {% for error in form.draft.errors %}
     <div style="color: red;"> {{ error }} </div>
   {% endfor %}
-  <br>
 
-  {{ form.content.label }}
-  {{ form.content(cols=50, rows=10, placeholder='Write your next awesome post...' ) }}
+  <!-- UPLOAD MEDIA -->
+  <!--
+  media stored in filesystem (limit size by 1MB)
+  path, MIME, post-id stored in media DB table
+  -->
+  <div class="js-upload uk-placeholder uk-text-center">
+      <span uk-icon="icon: cloud-upload"></span>
+      <span class="uk-text-middle">Attach photos by dropping them here or</span>
+      <div uk-form-custom>
+          <input type="file" multiple>
+          <span class="uk-link">selecting one</span>
+      </div>
+  </div>
+
+  <progress id="js-progressbar" class="uk-progress" value="0" max="100" hidden></progress>
+
+  <!-- PREVIEW button -->
+  <!-- save post and open current post in new tab -->
+  <div class="uk-flex">
+  <button class="uk-button uk-button-secondary uk-button-small" onclick='alert("hi"); return false;'>Preview</button>
+
+  {{ form.submit(class="uk-button uk-button-primary") }}
+  </div>
+
+  {{ form.content.label(style="display:none") }}
+  <div id="editor">
+  {{ form.content(id="editor", cols=50, rows=10, placeholder='Write your next awesome post...' ) }}
+  </div>
   {% for error in form.content.errors %}
     <div style="color: red;"> {{ error }} </div>
   {% endfor %}
 
 
-  {{ form.submit() }}
 
 </form>
 
 
-<!-- PREVIEW button -->
-<!-- save post and open current post in new tab -->
 
-<!-- UPLOAD MEDIA -->
-<!--
-media stored in filesystem (limit size by 1MB)
-path, MIME, post-id stored in media DB table
--->
-
-<!-- simpleMD text editor -->
-
-<!-- SAVE button -->
 
 {% endblock %}
 
 {% block javascript %}
-
-<script src="/static/javascript/dropimage.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/editor/0.1.0/editor.css">
+<script src="//cdn.jsdelivr.net/editor/0.1.0/editor.js"></script>
+<script src="//cdn.jsdelivr.net/editor/0.1.0/marked.js"></script>
+<script>
+var editor = new Editor();
+editor.render();
+</script>
+<script src="/static/javascript/drop_upload.js"></script>
 
 {% endblock %}

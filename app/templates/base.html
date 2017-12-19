@@ -7,9 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no">
     <!--
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" integrity="sha256-t2/7smZfgrST4FS1DT0bs/KotCM74XlcqZN5Vu7xlrw=" crossorigin="anonymous" />
+    <script src="https://use.fontawesome.com/a38d551a5f.js"></script>
     -->
-    <link rel="stylesheet" href="/static/css/lib/picnic.min.css">
+    <link rel="stylesheet" href="/static/css/lib/uikit.min.css">
+    <script src="/static/javascript/lib/uikit.min.js"></script>
+    <script src="/static/javascript/lib/uikit-icons.min.js"></script>
+
     <link rel="stylesheet" href="/static/css/custom.css">
+
+    {% block head %}{% endblock %}
     <title>Mini Blog</title>
   </head>
   <body>
@@ -23,7 +29,7 @@
     {% endif %}
   {% endwith %}
 
-  <main>
+  <main class="">
   {% block content %}{% endblock %}
   </main>
 
