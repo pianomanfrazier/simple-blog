@@ -1,6 +1,6 @@
-from flask import render_template, redirect, url_for, Blueprint, flash
+from flask import render_template, redirect, url_for, Blueprint, flash, request
 from ..authentication import requires_auth
-from ..forms import LoginForm
+from ..forms import LoginForm, EditPostForm
 
 admin_panel = Blueprint('admin', __name__)
 
@@ -12,13 +12,16 @@ def admin():
   return render_template('admin/index.html')
 
 @admin_panel.route('/edit')
-@admin_panel.route('/edit/<int:post_id>')
+@admin_panel.route('/edit/<int:post_id>', methods=['GET', 'POST'])
 @requires_auth
 def edit(post_id=None):
   if post_id == None:
     return redirect(url_for('.admin'))
   else:
-    return render_template('admin/edit.html', post_id=post_id)
+    form = EditPostForm()
+    if request.method == 'POST':
+      form.validate_on_submit()
+    return render_template('admin/edit.html',form=form, post_id=post_id)
 
 @admin_panel.route('/preview')
 @admin_panel.route('/preview/<slug>')

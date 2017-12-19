@@ -8,6 +8,57 @@
 {{ post_id }}
 </p>
 
+<form name="edit" action="" method="post" accept-charset="utf-8">
+
+  {{ form.hidden_tag() }}
+
+  {{ form.title.label }}
+  {{ form.title(size=32) }}
+  {% for error in form.title.errors %}
+    <div style="color: red;"> {{ error }} </div>
+  {% endfor %}
+
+  {{ form.slug.label }}
+  {{ form.slug(size=32) }}
+  {% for error in form.slug.errors %}
+    <div style="color: red;"> {{ error }} </div>
+  {% endfor %}
+
+  {{ form.pub_date.label }}
+  {{ form.pub_date(size=32, placeholder='12/01/17') }}
+  {% for error in form.pub_date.errors %}
+    <div style="color: red;"> {{ error }} </div>
+  {% endfor %}
+
+  {{ form.draft.label }}
+  {{ form.draft() }}
+  {% for error in form.draft.errors %}
+    <div style="color: red;"> {{ error }} </div>
+  {% endfor %}
+
+  {{ form.category.label }}
+  {{ form.category(size=32) }}
+  {% for error in form.category.errors %}
+    <div style="color: red;"> {{ error }} </div>
+  {% endfor %}
+
+  {{ form.tags.label }}
+  {{ form.tags(size=32, placeholder='tag1, tag2, tag3') }}
+  {% for error in form.tags.errors %}
+    <div style="color: red;"> {{ error }} </div>
+  {% endfor %}
+
+  {{ form.content.label }}
+  {{ form.content(cols=50, rows=10, placeholder='Write your next awesome post...' ) }}
+  {% for error in form.content.errors %}
+    <div style="color: red;"> {{ error }} </div>
+  {% endfor %}
+
+
+  {{ form.submit() }}
+
+</form>
+
 <!-- text fields
 title
 slug

@@ -15,7 +15,7 @@
   {% endfor %}
 
   {{ form.password.label }}
-  {{ form. password(size=32) }}
+  {{ form.password(size=32) }}
   {% for error in form.password.errors %}
     <div style="color: red;"> {{ error }} </div>
   {% endfor %}
