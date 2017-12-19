@@ -1,0 +1,18 @@
+main {
+  max-width: 40em;
+  margin: 0 auto;
+}
+
+[type="checkbox"] {
+  opacity: 1;
+  padding: 2px;
+  margin: -4px 6px;
+}
+
+fieldset {
+  padding-left: 0.5em;
+}
+
+.pr1 {
+  padding-right: 0.5em;
+}

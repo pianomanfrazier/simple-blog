@@ -21,6 +21,7 @@ def edit(post_id=None):
     form = EditPostForm()
     if request.method == 'POST':
       form.validate_on_submit()
+      #if valid commit to DB
     return render_template('admin/edit.html',form=form, post_id=post_id)
 
 @admin_panel.route('/preview')

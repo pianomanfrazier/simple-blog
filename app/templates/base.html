@@ -5,7 +5,11 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no">
+    <!--
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" integrity="sha256-t2/7smZfgrST4FS1DT0bs/KotCM74XlcqZN5Vu7xlrw=" crossorigin="anonymous" />
+    -->
+    <link rel="stylesheet" href="/static/css/lib/picnic.min.css">
+    <link rel="stylesheet" href="/static/css/custom.css">
     <title>Mini Blog</title>
   </head>
   <body>
@@ -19,7 +23,11 @@
     {% endif %}
   {% endwith %}
 
+  <main>
   {% block content %}{% endblock %}
+  </main>
+
+  {% block javascript %}{% endblock %}
 
   </body>
 </html>

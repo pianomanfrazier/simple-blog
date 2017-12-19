@@ -8,45 +8,81 @@
 {{ post_id }}
 </p>
 
+<form action="" method="post" accept-charset="utf-8" style="width:200px">
+  <label class="dropimage">
+    <input title="Drop image or click me" type="file" name="photo">
+  </label>
+  <input type="submit" value="Upload" />
+</form>
+
+
+<!-- edit post form 
+title
+slug
+pub-date
+draft (checkbox)
+category
+tags (comma separated)
+-->
 <form name="edit" action="" method="post" accept-charset="utf-8">
 
   {{ form.hidden_tag() }}
 
-  {{ form.title.label }}
-  {{ form.title(size=32) }}
-  {% for error in form.title.errors %}
-    <div style="color: red;"> {{ error }} </div>
-  {% endfor %}
+  <fieldset class="flex two">
+    
+    <div class="pr1" >
+    {{ form.title.label }}
+    {{ form.title(size=24, placeholder='A New Post') }}
+    {% for error in form.title.errors %}
+      <div style="color: red;"> {{ error }} </div>
+    {% endfor %}
+    </div>
 
-  {{ form.slug.label }}
-  {{ form.slug(size=32) }}
-  {% for error in form.slug.errors %}
-    <div style="color: red;"> {{ error }} </div>
-  {% endfor %}
+    <div class="pr1">
+    {{ form.slug.label }}
+    {{ form.slug(size=16, placeholder='a-new-post') }}
+    {% for error in form.slug.errors %}
+      <div style="color: red;"> {{ error }} </div>
+    {% endfor %}
+    </div>
 
-  {{ form.pub_date.label }}
-  {{ form.pub_date(size=32, placeholder='12/01/17') }}
-  {% for error in form.pub_date.errors %}
-    <div style="color: red;"> {{ error }} </div>
-  {% endfor %}
+  </fieldset>
 
+  <fieldset class="flex three">
+    
+    <div class="pr1" style="width: 7em;">
+    {{ form.pub_date.label }}
+    {{ form.pub_date(size=8, placeholder='12/01/17') }}
+    {% for error in form.pub_date.errors %}
+      <div style="color: red;"> {{ error }} </div>
+    {% endfor %}
+    </div>
+
+    <div class="pr1">
+    {{ form.category.label }}
+    {{ form.category(size=16) }}
+    {% for error in form.category.errors %}
+      <div style="color: red;"> {{ error }} </div>
+    {% endfor %}
+    </div>
+
+    <div class="pr1">
+    {{ form.tags.label }}
+    {{ form.tags(size=16, placeholder='tag1, tag2, tag3') }}
+    {% for error in form.tags.errors %}
+      <div style="color: red;"> {{ error }} </div>
+    {% endfor %}
+    </div>
+
+  </fieldset>
+
+  <br>
   {{ form.draft.label }}
   {{ form.draft() }}
   {% for error in form.draft.errors %}
     <div style="color: red;"> {{ error }} </div>
   {% endfor %}
-
-  {{ form.category.label }}
-  {{ form.category(size=32) }}
-  {% for error in form.category.errors %}
-    <div style="color: red;"> {{ error }} </div>
-  {% endfor %}
-
-  {{ form.tags.label }}
-  {{ form.tags(size=32, placeholder='tag1, tag2, tag3') }}
-  {% for error in form.tags.errors %}
-    <div style="color: red;"> {{ error }} </div>
-  {% endfor %}
+  <br>
 
   {{ form.content.label }}
   {{ form.content(cols=50, rows=10, placeholder='Write your next awesome post...' ) }}
@@ -59,14 +95,6 @@
 
 </form>
 
-<!-- text fields
-title
-slug
-pub-date
-category
-tags (comma separated)
-draft (checkbox)
--->
 
 <!-- PREVIEW button -->
 <!-- save post and open current post in new tab -->
@@ -80,5 +108,11 @@ path, MIME, post-id stored in media DB table
 <!-- simpleMD text editor -->
 
 <!-- SAVE button -->
+
+{% endblock %}
+
+{% block javascript %}
+
+<script src="/static/javascript/dropimage.js"></script>
 
 {% endblock %}
