@@ -1,0 +1,33 @@
+{% from "admin/_input.html" import btn %}
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action="{{ url_for('admin.upload') }}" method="post" enctype="multipart/form-data">
+  <fieldset class="">
+    <input class="" type=file name=file>
+    <input class="{{ btn }}" type=submit value=Upload>
+  </fieldset>
+</form>
+
+<table>
+  <tr>
+    <th>Filename</th>
+    <th>Size</th>
+    <th>Filepath</th>
+    <th>Mime-Type</th>
+  </tr>
+  {% for file in media %}
+  <tr>
+    <td>{{ file.filename }}</td> 
+    <td>{{ file.size}}</td> 
+    <td>{{ file.filepath}}</td> 
+    <td>{{ file.mime}}</td> 
+  </tr>
+  {% endfor %}
+</table>
+
+
+
+{% endblock %}

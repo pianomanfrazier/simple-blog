@@ -31,24 +31,40 @@ def allowed_file(filename):
   return '.' in filename and \
     filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
-@admin_panel.route('/upload', methods=['POST'])
+@admin_panel.route('/media', methods=['POST', 'GET'])
 @requires_auth
 def upload():
-  if 'file' not in request.files:
-    flash('No file part')
-    return redirect(request.referrer)
-  file = request.files['file']
-  if file.filename == '':
-    flash('No selected file')
-    return redirect(request.referrer)
-  if file and allowed_file(file.filename):
-    filename = secure_filename(file.filename)
-    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    flash('Upload success!')
-    return redirect(request.referrer)
-  else:
-    flash('Upload Error')
-    return redirect(request.referrer)
+  media = [
+    { 'filename' : 'pic.png',
+      'size'     : '10 KB',
+      'filepath' : '/images/uploads/pic.png',
+      'mime'     : 'image/png'
+    },
+    { 'filename' : 'pic2.jpg',
+      'size'     : '14 KB',
+      'filepath' : '/images/uploads/pic2.png',
+      'mime'     : 'image/jpeg'
+    }
+  ]
+  if request.method == 'POST':
+    # get DB
+    if 'file' not in request.files:
+      flash('No file part')
+      return render_template('admin/media.html', media=media)
+    file = request.files['file']
+    if file.filename == '':
+      flash('No selected file')
+      return render_template('admin/media.html', media=media)
+    if file and allowed_file(file.filename):
+      filename = secure_filename(file.filename)
+      file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+      # save to DB
+      flash('Upload success!')
+      return render_template('admin/media.html', media=media)
+    else:
+      flash('Upload Error')
+      return render_template('admin/media.html', media=media)
+  return render_template('admin/media.html', media=media)
 
 @admin_panel.route('/preview')
 @admin_panel.route('/preview/<slug>')

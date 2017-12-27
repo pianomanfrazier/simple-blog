@@ -4,15 +4,14 @@
   border-left: 1px solid #e0e0e0;
 }
 
-main {
-  max-width: 37em;
-  margin: 0 auto;
+table {
+  border-collapse: collapse;
 }
 
-.input-component {
-  margin: 0 0.5em 0.5em 0;
+table td, tr, th {
+  padding: 8px;
 }
 
-.uk-button {
-  margin: 0 0.5em 0.5em 0;
+table tr:nth-child(even) {
+  background-color: #f2f2f2; 
 }

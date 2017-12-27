@@ -1,4 +1,4 @@
-{% from "admin/_input.html" import input %}
+{% from "admin/_input.html" import input, btn %}
 
 {% extends "base.html" %}
 
@@ -10,59 +10,43 @@
 {{ post_id }}
 </p>
 
-<form action="{{ url_for('admin.upload') }}" method="post" enctype="multipart/form-data">
-  <fieldset class="uk-fieldset uk-flex">
-    <input class="upload-button" type=file name=file>
-    <input class="uk-button" type=submit value=Upload>
-  </fieldset>
-</form>
 
 <form name="edit" action="" method="post" accept-charset="utf-8">
+{{ form.hidden_tag() }}
 
-  {{ form.hidden_tag() }}
 
-
-  <fieldset class="uk-fieldset uk-flex">
+  <div class="flex">
 
     {{ input(form.title, size=24, placeholder="A New Post") }} 
     {{ input(form.slug, size=16, placeholder="a-new-post") }} 
 
-  </fieldset>
+  </div>
 
-  <fieldset class="uk-fieldset uk-flex">
+  <div class="flex">
     
     {{ input(form.pub_date, size=8, placeholder="12/01/17") }} 
     {{ input(form.category, size=16) }} 
     {{ input(form.tags, size=16, placeholder="tag1, tag2, tag3") }} 
 
-  </fieldset>
+  </div>
 
   {{ form.draft.label }}
-  {{ form.draft(class="uk-checkbox") }}
-  {% for error in form.draft.errors %}
-    <div style="color: red;"> {{ error }} </div>
-  {% endfor %}
+  {{ form.draft(class="") }}
 
   <!-- PREVIEW button -->
   <!-- save post and open current post in new tab -->
-  <div class="uk-flex">
-  <button class="uk-button uk-button-secondary uk-button-small" onclick='alert("hi"); return false;'>Preview</button>
-
-  {{ form.submit(class="uk-button uk-button-primary") }}
+  <div class="flex">
+  <button class="{{ btn }}" onclick='alert("hi"); return false;'>Preview</button>
+  {{ form.submit(class=btn) }}
   </div>
 
   {{ form.content.label(style="display:none") }}
-  <div id="editor">
-  {{ form.content(id="editor", cols=50, rows=10, placeholder='Write your next awesome post...' ) }}
-  </div>
+  {{ form.content(class="db mv2 pa2 w-100 border-box ba b--black-20 hover-black", id="editor", cols=50, rows=10, placeholder='Write your next awesome post...' ) }}
   {% for error in form.content.errors %}
-    <div style="color: red;"> {{ error }} </div>
+    <div class="red f6"> {{ error }} </div>
   {% endfor %}
 
 </form>
-
-
-
 
 {% endblock %}
 

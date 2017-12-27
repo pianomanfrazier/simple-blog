@@ -32,5 +32,7 @@ class Comment(db.Model):
 
 class Media(db.Model):
   id           = db.Column(db.Integer, primary_key=True)
-  mime         = db.Column(db.String(16))
+  name         = db.Column(db.String(32))
   filepath     = db.Column(db.String(16)) 
+  mime         = db.Column(db.String(16))
+  size         = db.Column(db.Integer)

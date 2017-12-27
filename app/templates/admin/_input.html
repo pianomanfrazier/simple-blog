@@ -1,9 +1,11 @@
-{% macro input(component, size=16, placeholder="", labelclass="", inputclass="uk-input", value="") -%}
-  <div class="input-component">
-    {{ component.label(class=labelclass) }}
-    {{ component(size=size, placeholder=placeholder, class=inputclass, value=value) }}
+{% macro input(component, size=16, placeholder="", labelclass="", inputclass="", value="") -%}
+  <div class="mb2">
+    {{ component.label(class=labelclass+"db mb1") }}
+    {{ component(size=size, placeholder=placeholder, class=inputclass+"input-reset ba b--black-20 pa2 mr2 db", value=value) }}
     {% for error in component.errors %}
-      <div style="color: red;"> {{ error }} </div>
+      <div class="red f6"> {{ error }} </div>
     {% endfor %}
   </div>
 {%- endmacro %}
+
+{% set btn = "input-reset ba b--blue bg-blue white pa2 mr2 dim pointer" %}
