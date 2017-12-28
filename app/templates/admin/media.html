@@ -1,10 +1,10 @@
-{% from "admin/_input.html" import btn %}
+{% from "admin/_input.html" import btn, btn_warning %}
 
 {% extends "base.html" %}
 
 {% block content %}
 
-<form action="{{ url_for('admin.upload') }}" method="post" enctype="multipart/form-data">
+<form action="{{ url_for('admin.media') }}" method="post" enctype="multipart/form-data">
   <fieldset class="">
     <input class="" type=file name=file>
     <input class="{{ btn }}" type=submit value=Upload>
@@ -17,17 +17,43 @@
     <th>Size</th>
     <th>Filepath</th>
     <th>Mime-Type</th>
+    <th>ID</th>
+    <th></th>
   </tr>
   {% for file in media %}
   <tr>
     <td>{{ file.filename }}</td> 
-    <td>{{ file.size}}</td> 
-    <td>{{ file.filepath}}</td> 
-    <td>{{ file.mime}}</td> 
+    <td>{{ file.size }}</td> 
+    <td>{{ file.filepath }}</td> 
+    <td>{{ file.mime }}</td> 
+    <td>{{ file.id }}</td> 
+    <td><button class="{{ btn_warning }}" onclick="myFunc({{ file.id }})">Delete</button></td>
   </tr>
   {% endfor %}
 </table>
 
+{% endblock %}
 
+{% block javascript %}
+
+<script charset="utf-8">
+  function myFunc(id) {
+    console.log(parseInt(id));
+    if (confirm('Are your sure you want to delete this item?')) {
+      // make delete request for item
+      $.ajax({
+        url: '{{ url_for("admin.media") }}/' + id,
+        type: 'DELETE',
+        success: function(result) {
+          alert(result.message + "\nmedia " + id + " was deleted.");
+          // reload the table
+          location.reload();
+        }
+      })
+    } else {
+      console.log('no');
+    }
+  }
+</script>
 
 {% endblock %}

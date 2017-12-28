@@ -10,8 +10,7 @@ admin_panel = Blueprint('admin', __name__)
 @admin_panel.route('/')
 @requires_auth
 def admin():
-  #if not logged in show login page
-  #else show admin page
+  # need admin menu
   return render_template('admin/index.html')
 
 @admin_panel.route('/edit')
@@ -23,24 +22,34 @@ def edit(post_id=None):
   else:
     form = EditPostForm()
     if request.method == 'POST':
-      form.validate_on_submit()
-      #if valid commit to DB
-    return render_template('admin/edit.html',form=form, post_id=post_id)
+      if form.validate_on_submit():
+        flash(form.title.data)
+        flash(form.slug.data)
+        flash(form.pub_date.data)
+        flash(form.draft.data)
+        flash(form.category.data)
+        flash(form.tags.data)
+        flash(form.content.data)
+        #if valid commit edit to DB
+    return render_template('admin/edit.html', form=form, post_id=post_id)
 
 def allowed_file(filename):
   return '.' in filename and \
     filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
 @admin_panel.route('/media', methods=['POST', 'GET'])
+@admin_panel.route('/media/<int:media_id>', methods=['DELETE'])
 @requires_auth
-def upload():
+def media(media_id=None):
   media = [
-    { 'filename' : 'pic.png',
+    { 'id'       : 1,
+      'filename' : 'pic.png',
       'size'     : '10 KB',
       'filepath' : '/images/uploads/pic.png',
       'mime'     : 'image/png'
     },
-    { 'filename' : 'pic2.jpg',
+    { 'id'       : 2,
+      'filename' : 'pic2.jpg',
       'size'     : '14 KB',
       'filepath' : '/images/uploads/pic2.png',
       'mime'     : 'image/jpeg'
@@ -64,13 +73,20 @@ def upload():
     else:
       flash('Upload Error')
       return render_template('admin/media.html', media=media)
+  if request.method == 'DELETE':
+    if media_id != None:
+      # look up media by id, get path and call os.rm(path)
+      return jsonify(message   = "success",
+                     media_id  = media_id)
+    else:
+      return jsonify(message   = "failure")
   return render_template('admin/media.html', media=media)
 
 @admin_panel.route('/preview')
-@admin_panel.route('/preview/<slug>')
+@admin_panel.route('/preview/<int:post_id>')
 @requires_auth
-def preview(slug=None):
-  if slug == None:
+def preview(post_id=None):
+  if post_id == None:
     return redirect(url_for('.admin'))
   else:
     post = { 'title' : 'How to tame a bear',
